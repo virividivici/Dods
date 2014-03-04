@@ -1,0 +1,46 @@
+<html ng-app="myApp">
+<head>
+	<title>Demo</title>
+	<script type="text/javascript" src="js/lib/angular.min.js"></script>
+	<script type="text/javascript" src="js/lib/angular-resource.min.js"></script>
+	<script type="text/javascript" src="js/controllers/app.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css">
+	<style>
+		.suspended {
+			background-color: #c4cb09;
+		}
+	</style>
+</head>
+<body>
+	<h1></h1>
+
+
+	<div class="container" ng-controller="AppCtrl">
+		<h1>People</h1>
+        <div class="pull-left span6">
+			<ul>
+				<li ng-class="{'suspended':person.suspend}" ng-repeat="person in people.results | startFrom:currentPage*pageSize | limitTo:pageSize">
+					<a href="" ng-click="setPerson(person)">
+						{{person.title}} {{person.name}} {{person.surname}}
+					</a>
+				</li>
+			</ul>
+
+			<button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+		        Previous
+		    </button>
+		    {{currentPage+1}}/{{numberOfPages()}}
+		    <button ng-disabled="currentPage >= totalResults/pageSize - 1" ng-click="currentPage=currentPage+1">
+		        Next
+		    </button>
+		</div> 
+
+		<div class="span5" ng-include="sidebarUrl" >
+
+		</div>
+
+
+	</div>
+</body>
+</html>
